@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+		<!-- The core Firebase JS SDK is always required and must be listed first -->
+		<script src="https://www.gstatic.com/firebasejs/7.6.1/firebase-app.js"></script>
+
+
+		<!-- TODO: Add SDKs for Firebase products that you want to use
+			https://firebase.google.com/docs/web/setup#available-libraries -->
+		<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-auth.js"></script>
+		<script src="https://www.gstatic.com/firebasejs/7.6.0/firebase-database.js"></script>
+
+		<!-- FireBase Credentials -->
+		<script src="js/firebase.js"></script>
+
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.5.0/knockout-min.js"></script>
+
+		<script src="js/auth.js"></script>
+		<script src="js/knockout.js"></script>
+
+		<link rel="stylesheet" href="css/styles.css">
+	</head>
+
+	<body>
+
+		<div class="login-cover">
+			<input type="text" id="loginEmail">
+			<input type="text" id="loginPassword">
+			<button id="loginBtn">Sign In</button>
+		</div>
+
+		<div class="container">
+			<div class="row">
+				<div class="col-md-12">
+
+					<button id="signOutBtn">Sign Out</button>
+
+					<h1>Travel Blog</h1>
+
+					<table class="table">
+						<thead>
+							<tr>
+								<th>Place</th>
+								<th>Country</th>
+								<th>Region</th>
+								<th>Review</th>
+								<th>Ratings</th>
+								<th> </th>
+							</tr>
+						</thead>
+						<tbody data-bind="foreach: blogs">
+							<tr>
+								<td>
+									<input class="form-control" data-bind="value: place" />
+								</td>
+								<td>
+									<!-- <input class="form-control" data-bind="value: country" /> -->
+									<select class="form-control" data-bind="options: $root.countries, value: country, optionsText: 'name'"></select>
+								</td>
+								<td>
+									<span data-bind="text: region"></span>
+								</td>
+								<td>
+									<input class="form-control" data-bind="value: review" />
+								</td>
+								<td>
+									<div data-bind="starRating: points"></div>
+								</td>
+								<td>
+									<input type="hidden" name="_id" data-bind="value: _id" />
+									<a class="btn btn-warning" href="#" data-bind="click: $root.saveBlog">Save</a>
+									<a class="btn btn-danger" href="#" data-bind="click: $root.deleteBlog">Remove</a>
+								</td>
+							</tr>    
+						</tbody>
+					</table>
+
+					<button class="btn btn-success" data-bind="click: $root.createBlog">New</button>
+
+				</div>
+			</div>
+
+			<div class="row">
+			    <div class="col-md-12">
+			    	<p>
+			    		<span data-bind="text: totalEntries()"></span> entries with an average rating of 
+			    		<span data-bind="text: averageRating()"></span>.
+			    	</p>
+			    </div>
+			</div>
+
+		</div>
+	</body>
+</html>
